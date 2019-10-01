@@ -297,7 +297,7 @@ mkrwan.build.core=arduino
 mkrwan.build.vid=0x0483
 mkrwan.build.pid=0x374b
 mkrwan.build.did=0xffff
-mkrwan.build.extra_flags=-DSTM32L072xx -march=armv6-m -mthumb -mabi=aapcs -mfloat-abi=soft -fsingle-precision-constant
+mkrwan.build.extra_flags=-DSTM32L072xx -march=armv6-m -mthumb -mabi=aapcs -mfloat-abi=soft -fsingle-precision-constant -DUSBCON
 mkrwan.build.ldscript=linker_scripts/STM32L072CZ_FLASH.ld
 mkrwan.build.openocdscript=openocd_scripts/b-l072z-lrwan1.cfg
 mkrwan.build.variant=B-L072Z-LRWAN1
@@ -310,6 +310,13 @@ mkrwan.menu.speed.16=16 MHz (No USB)
 mkrwan.menu.speed.16.build.f_cpu=16000000L
 mkrwan.menu.speed.4=4.2 MHz (No USB)
 mkrwan.menu.speed.4.build.f_cpu=4200000L
+
+mkrwan.menu.usb.cdc=Serial
+mkrwan.menu.usb.cdc.build.usb_type=USB_TYPE_CDC
+mkrwan.menu.usb.cdc_hid=Serial + Keyboard + Mouse
+mkrwan.menu.usb.cdc_hid.build.usb_type=USB_TYPE_CDC_HID
+mkrwan.menu.usb.none=No USB
+mkrwan.menu.usb.none.build.usb_type=USB_TYPE_NONE
 
 mkrwan.menu.opt.os=Smallest Code
 mkrwan.menu.opt.os.build.flags.optimize=-Os

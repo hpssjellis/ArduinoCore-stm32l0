@@ -58,7 +58,7 @@ extern "C"
  *----------------------------------------------------------------------------*/
 
 // Number of pins defined in PinDescription array
-#define PINS_COUNT           (22u)
+#define PINS_COUNT           (24u)
 #define NUM_DIGITAL_PINS     (16u)
 #define NUM_ANALOG_INPUTS    (6u)
 #define NUM_ANALOG_OUTPUTS   (0u)
@@ -143,7 +143,17 @@ static const uint8_t SCL = PIN_WIRE_SCL;
  *        Arduino objects - C++ only
  *----------------------------------------------------------------------------*/
 
+#ifdef USBCON
+#define PIN_USB_DM           (22ul)
+#define PIN_USB_DP           (23ul)
+#define STM32L0_CONFIG_PIN_VBUS  STM32L0_GPIO_PIN_NONE
+#endif
+
 #ifdef __cplusplus
+#ifdef USBCON
+#include "USBAPI.h"
+extern CDC  SerialUSB;
+#endif
 extern Uart Serial;
 extern Uart Serial1;
 #endif

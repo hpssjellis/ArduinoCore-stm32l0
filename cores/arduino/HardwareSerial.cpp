@@ -33,15 +33,15 @@ void serialEvent() __attribute__((weak));
 
 #if defined(USBCON)
 
-extern bool Serial_available() __attribute__((weak));
+extern bool SerialUSB_available() __attribute__((weak));
 
-bool Serial_available() { return SerialUSB.available(); }
+bool SerialUSB_available() { return SerialUSB.available(); }
 
 stm32l0_usbd_cdc_t g_CDC;
 
 CDC SerialUSB(&g_CDC, (serialEvent ? serialEventRun : NULL));
 
-#else
+#endif
 
 extern bool Serial_available() __attribute__((weak));
 
@@ -51,8 +51,6 @@ static stm32l0_uart_t g_Serial;
 extern const stm32l0_uart_params_t g_SerialParams;
 
 Uart Serial(&g_Serial, &g_SerialParams, (serialEvent ? serialEventRun : NULL));
-
-#endif
 
 #if SERIAL_INTERFACES_COUNT > 1
 
