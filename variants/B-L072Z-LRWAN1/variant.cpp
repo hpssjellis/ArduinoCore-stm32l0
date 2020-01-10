@@ -140,5 +140,7 @@ void initVariant()
 {
 #ifndef USBCON
     CMWX1ZZABZ_Initialize(STM32L0_GPIO_PIN_PB6, STM32L0_GPIO_PIN_PA11);
+#else
+    CMWX1ZZABZ_Initialize(STM32L0_GPIO_PIN_PA8, STM32L0_GPIO_PIN_NONE);
 #endif
 }

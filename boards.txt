@@ -331,6 +331,62 @@ mkrwan.menu.opt.o3=Fastest
 mkrwan.menu.opt.o3.build.flags.optimize=-O3
 mkrwan.menu.opt.o3.build.flags.ldspecs=
 
+# Arduino NANO WAN
+# ---------------------------------------
+nanowan.name=Arduino NANO WAN
+nanowan.vid.0=0x0483
+nanowan.pid.0=0xdf11
+
+nanowan.upload.tool=stm32l0_dfu
+nanowan.upload.protocol=dfu
+nanowan.upload.maximum_size=196608
+nanowan.upload.maximum_data_size=20480
+nanowan.upload.use_1200bps_touch=true
+nanowan.upload.wait_for_upload_port=false
+nanowan.upload.native_usb=false
+
+nanowan.build.mcu=cortex-m0plus
+nanowan.build.f_cpu=32000000L
+nanowan.build.board=STM32L0_B_L072Z_LRWAN1
+nanowan.build.arch=stm32l0
+nanowan.build.core=arduino
+nanowan.build.vid=0x0483
+nanowan.build.pid=0xdf11
+nanowan.build.did=0xffff
+nanowan.build.extra_flags=-DSTM32L072xx -march=armv6-m -mthumb -mabi=aapcs -mfloat-abi=soft -fsingle-precision-constant -DUSBCON
+nanowan.build.ldscript=linker_scripts/STM32L072CZ_FLASH.ld
+nanowan.build.openocdscript=openocd_scripts/b-l072z-lrwan1.cfg
+nanowan.build.variant=B-L072Z-LRWAN1
+nanowan.build.variant_system_libs="-L{runtime.platform.path}/system/STM32L0xx/Lib" "-L{runtime.platform.path}/system/CMSIS/Lib" -lstm32l072xx -larm_cortexM0l_math
+nanowan.build.variant_system_include="-I{runtime.platform.path}/system/CMSIS/Include" "-I{runtime.platform.path}/system/CMSIS/Device/ST/STM32L0xx/Include" "-I{runtime.platform.path}/system/STM32L0xx/Include" 
+
+nanowan.menu.speed.32=32 MHz
+nanowan.menu.speed.32.build.f_cpu=32000000L
+nanowan.menu.speed.16=16 MHz (No USB)
+nanowan.menu.speed.16.build.f_cpu=16000000L
+nanowan.menu.speed.4=4.2 MHz (No USB)
+nanowan.menu.speed.4.build.f_cpu=4200000L
+
+nanowan.menu.usb.cdc=Serial
+nanowan.menu.usb.cdc.build.usb_type=USB_TYPE_CDC
+nanowan.menu.usb.cdc_hid=Serial + Keyboard + Mouse
+nanowan.menu.usb.cdc_hid.build.usb_type=USB_TYPE_CDC_HID
+nanowan.menu.usb.none=No USB
+nanowan.menu.usb.none.build.usb_type=USB_TYPE_NONE
+
+nanowan.menu.opt.os=Smallest Code
+nanowan.menu.opt.os.build.flags.optimize=-Os
+nanowan.menu.opt.os.build.flags.ldspecs=--specs=nano.specs
+nanowan.menu.opt.o1=Fast
+nanowan.menu.opt.o1.build.flags.optimize=-O1
+nanowan.menu.opt.o1.build.flags.ldspecs=
+nanowan.menu.opt.o2=Faster
+nanowan.menu.opt.o2.build.flags.optimize=-O2
+nanowan.menu.opt.o2.build.flags.ldspecs=
+nanowan.menu.opt.o3=Fastest
+nanowan.menu.opt.o3.build.flags.optimize=-O3
+nanowan.menu.opt.o3.build.flags.ldspecs=
+
 # ST B-L072Z-LRWAN1
 # ---------------------------------------
 B-L072Z-LRWAN1.name=B-L072Z-LRWAN1
