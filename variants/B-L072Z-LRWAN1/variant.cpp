@@ -138,7 +138,7 @@ extern const stm32l0_i2c_params_t g_WireParams = {
 
 void initVariant()
 {
-#ifndef USBCON
+#if !defined(USBCON) || (USB_TYPE == USB_TYPE_NONE)
     CMWX1ZZABZ_Initialize(STM32L0_GPIO_PIN_PB6, STM32L0_GPIO_PIN_PA11);
 #else
     CMWX1ZZABZ_Initialize(STM32L0_GPIO_PIN_PA8, STM32L0_GPIO_PIN_NONE);

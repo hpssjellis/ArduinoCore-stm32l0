@@ -331,6 +331,57 @@ mkrwan.menu.opt.o3=Fastest
 mkrwan.menu.opt.o3.build.flags.optimize=-O3
 mkrwan.menu.opt.o3.build.flags.ldspecs=
 
+# Arduino Portenta Vision Shield
+# ---------------------------------------
+portenta_vision.name=Arduino Portenta Vision Shield
+portenta_vision.vid.0=0x0483
+portenta_vision.pid.0=0x374b
+
+portenta_vision.upload.tool=stm32flash
+portenta_vision.upload.protocol=
+portenta_vision.upload.maximum_size=196608
+portenta_vision.upload.maximum_data_size=20480
+portenta_vision.upload.use_1200bps_touch=false
+portenta_vision.upload.wait_for_upload_port=false
+portenta_vision.upload.native_usb=false
+
+portenta_vision.build.mcu=cortex-m0plus
+portenta_vision.build.f_cpu=32000000L
+portenta_vision.build.board=STM32L0_B_L072Z_LRWAN1
+portenta_vision.build.arch=stm32l0
+portenta_vision.build.core=arduino
+portenta_vision.build.vid=0x0483
+portenta_vision.build.pid=0x374b
+portenta_vision.build.did=0xffff
+portenta_vision.build.extra_flags=-DSTM32L072xx -march=armv6-m -mthumb -mabi=aapcs -mfloat-abi=soft -fsingle-precision-constant
+portenta_vision.build.ldscript=linker_scripts/STM32L072CZ_FLASH.ld
+portenta_vision.build.openocdscript=openocd_scripts/b-l072z-lrwan1.cfg
+portenta_vision.build.variant=B-L072Z-LRWAN1
+portenta_vision.build.variant_system_libs="-L{runtime.platform.path}/system/STM32L0xx/Lib" "-L{runtime.platform.path}/system/CMSIS/Lib" -lstm32l072xx -larm_cortexM0l_math
+portenta_vision.build.variant_system_include="-I{runtime.platform.path}/system/CMSIS/Include" "-I{runtime.platform.path}/system/CMSIS/Device/ST/STM32L0xx/Include" "-I{runtime.platform.path}/system/STM32L0xx/Include" 
+
+portenta_vision.menu.speed.32=32 MHz
+portenta_vision.menu.speed.32.build.f_cpu=32000000L
+portenta_vision.menu.speed.16=16 MHz (No USB)
+portenta_vision.menu.speed.16.build.f_cpu=16000000L
+portenta_vision.menu.speed.4=4.2 MHz (No USB)
+portenta_vision.menu.speed.4.build.f_cpu=4200000L
+
+portenta_vision.build.usb_type=USB_TYPE_NONE
+
+portenta_vision.menu.opt.os=Smallest Code
+portenta_vision.menu.opt.os.build.flags.optimize=-Os
+portenta_vision.menu.opt.os.build.flags.ldspecs=--specs=nano.specs
+portenta_vision.menu.opt.o1=Fast
+portenta_vision.menu.opt.o1.build.flags.optimize=-O1
+portenta_vision.menu.opt.o1.build.flags.ldspecs=
+portenta_vision.menu.opt.o2=Faster
+portenta_vision.menu.opt.o2.build.flags.optimize=-O2
+portenta_vision.menu.opt.o2.build.flags.ldspecs=
+portenta_vision.menu.opt.o3=Fastest
+portenta_vision.menu.opt.o3.build.flags.optimize=-O3
+portenta_vision.menu.opt.o3.build.flags.ldspecs=
+
 # Arduino NANO WAN
 # ---------------------------------------
 nanowan.name=Arduino NANO WAN
