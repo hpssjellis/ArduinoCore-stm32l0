@@ -1,5 +1,8 @@
 /*
 *
+* To install core, just add a "hardware" folder beside your "libraries" folder in linux "$sketchbook" folder
+* Then unzip this repository in that "hardware" folder
+*
 * For farthest LoRa sending max at 11 BYTES or 88 bits
 * Thats 11 letters perfect enough to send Machine Learning Coded information
 * or 88 bits if you want to Hexadecimal exchange data.  
