@@ -4,7 +4,7 @@
 * on windows use documents/arduino/  and make a hardware folder.
 * Then unzip this repository in that "hardware" folder
 * Note: not all the code runs on windows but you can at least see the methods
-* Alternate install is to install https://github.com/GrumpyOldPizza/ArduinoCore-stm32l0 using the json file
+* Alternate install is to install https://github.com/GrumpyOldPizza/ArduinoCore-stm32l0 "TleraCorp" using the json file
 *
 * https://grumpyoldpizza.github.io/ArduinoCore-stm32l0/package_stm32l0_boards_index.json
 *
