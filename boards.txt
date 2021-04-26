@@ -524,4 +524,3 @@ NUCLEO-L073RZ.menu.opt.o2.build.flags.ldspecs=
 NUCLEO-L073RZ.menu.opt.o3=Fastest
 NUCLEO-L073RZ.menu.opt.o3.build.flags.optimize=-O3
 NUCLEO-L073RZ.menu.opt.o3.build.flags.ldspecs=
-
