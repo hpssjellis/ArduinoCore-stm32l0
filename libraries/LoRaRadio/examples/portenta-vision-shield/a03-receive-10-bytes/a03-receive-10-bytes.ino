@@ -39,6 +39,8 @@ void setup( void ){
     LoRaRadio.setSpreadingFactor(LoRaRadio.SF_7);
     LoRaRadio.setCodingRate(LoRaRadio.CR_4_5);
     LoRaRadio.setLnaBoost(true);
+   
+   //    LoRaRadio.setFixedPayloadLength(10);   //testing ???
   
     LoRaRadio.onReceive(myReceive);  // just telling it about the callback 
     LoRaRadio.receive(0);            // is zero infinite, other upto milliseconds
