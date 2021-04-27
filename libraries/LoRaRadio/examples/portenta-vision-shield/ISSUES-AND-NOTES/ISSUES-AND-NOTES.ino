@@ -26,7 +26,8 @@
 * Presntly working on getting a confirmation response.
 *
 *
-*
+* April 26th, 2021
+* try setIQInverted(true) on gateway send and node read. excetra
 *
 *
 *
