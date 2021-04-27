@@ -12,12 +12,16 @@ void setup( void )
     LoRaRadio.begin(915000000);
 
     LoRaRadio.setFrequency(915000000);
-    LoRaRadio.setTxPower(1);    // smallest try -1, default 14,  max ~20
-    LoRaRadio.setBandwidth(LoRaRadio.BW_125);
-    LoRaRadio.setSpreadingFactor(LoRaRadio.SF_7);
-    LoRaRadio.setCodingRate(LoRaRadio.CR_4_5);
+    LoRaRadio.setTxPower(1);                      // smallest try -1, default 14,  max ~20
+    LoRaRadio.setBandwidth(LoRaRadio.BW_125);     // Bandwidth: B W_125   BW_250   BW_500
+    LoRaRadio.setSpreadingFactor(LoRaRadio.SF_7); // Spreading Factor: SF_7   SF_8		SF_9	SF_10	SF_11	SF_12	
+    LoRaRadio.setCodingRate(LoRaRadio.CR_4_5);    // Coding Rate: CR_4_5	CR_4_6	CR_4_7	CR_4_8	
     LoRaRadio.setLnaBoost(true);
        
+   
+
+    
+    
    //    LoRaRadio.setFixedPayloadLength(10);   //testing ???
 
 }
