@@ -34,7 +34,7 @@ void mySend(void){
   LoRaRadio.endPacket();      
 
   Serial.println(); 
-  Serial.println("Sending"); 
+  Serial.println("Sent: "+String(msg)); 
 
   // timer02.stop();
 }
@@ -69,7 +69,7 @@ void setup( void ){
 
 void loop( void ){
         LoRaRadio.receive(0); 
-        delay(1000);
+        delay(500);
 }
 
 
@@ -90,6 +90,6 @@ static void myReceive(void){
 
                 
 
-   timer01.start(myPrint, 500);
-   timer02.start(mySend, 50);
+   timer01.start(myPrint, 50);
+   timer02.start(mySend, 70);
 }
