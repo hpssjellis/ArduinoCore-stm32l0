@@ -2,8 +2,13 @@
 *
 * LoRaML for Machine Learning 10 byte communication application of LoRa/LoRaWan technologies
 *
+* General use: A machine Learning program sends a pre-configured 10 Byte code through LoRa to the web.
+*
+*
+*
 * Attempt to make the PortentaH7 with LoRa Vision Shield more useful
-* for situations when a LoRaWan Gateway is not nearby, or when a busines does not want to pay unless a device goes off-site.
+* for situations when a LoRaWan Gateway is not nearby, or when a busines does not want to use 
+* a public network unless the device goes off-site.
 * Note: Not security interested.
 *
 *
