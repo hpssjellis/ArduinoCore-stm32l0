@@ -1,76 +1,70 @@
-// crashing
-
-
-
-
-
-
-
 #include "LoRaRadio.h"
 #include "TimerMillis.h"
 
 TimerMillis timerOn;
 
 
-
-
 int myIncoming ;
 int myRssi     ;
 int mySnr      ;
 
-const int myCharMax = 10; // allows 10 bytes      //64;  code breaks if sent bigger than this
+//const int myMaxBytes = 10;
+const int myCharMax = 11; // allows 10 bytes and extra signal //64;  code breaks if sent bigger than this
 char myInArray[myCharMax];
 
-const int myBigCharMax = 100; // allows 10 bytes      //64;  code breaks if sent bigger than this
-char myBigInArray[myBigCharMax];
+//const int myBigCharMax = 64;      //64;  code breaks if sent bigger than this
+char myBigInArray[myCharMax];
 
 int myFinalSize=0;
 
-//String myInString="";
-
-
-//static void myReceive(void);
-
-/*
- * 
- * 
- *   while (LoRaRadio.available() ) {
-    myInArray[myI++] = (char)LoRaRadio.read() ;
-    if (myI >= myCharMax) {break;}
-  }
- * 
- */
 
 
 void mySerialRead(void){
   int myI=0;
   while (Serial.available()) {          
-   //  Serial.write(Serial.read());  
      myBigInArray[myI++] = (char)Serial.read();
+   //  if (myI >= myCharMax) {break;}
   }
-  myFinalSize =  myI;
-     
-  //  myInString = Serial.readString();
+  
+  myFinalSize =  myI;  
 
-    if (myFinalSize == myCharMax){  // got 10 bytes so send it
-    LoRaRadio.setIQInverted(true);                // true gateway reads, node sends
+  if ( myFinalSize > 0){
+
+    if (myFinalSize == myCharMax-1){  // got 10 bytes so send it
+   // LoRaRadio.setIQInverted(true);                // true gateway reads, node sends
+    //myBigInArray[10] = '*';
+    //char array needs to be the corect size
+  //  strcpy(myInArray, myBigInArray);  
+
 
     LoRaRadio.beginPacket();  
-    LoRaRadio.write(myBigInArray, sizeof(myBigInArray));    
+    LoRaRadio.write(myBigInArray, sizeof(myBigInArray));   
+  //  LoRaRadio.write(myBigInArray, myCharMax);     
+    //LoRaRadio.write(myBigInArray);    
     LoRaRadio.endPacket(); 
     
-    LoRaRadio.setIQInverted(true);                // true gateway reads, node sends
+    //LoRaRadio.setIQInverted(true);                // true gateway reads, node sends
       
-    Serial.println("10 Bytes");
+        Serial.print(String(myCharMax) + " Bytes sent: ");
+    
+    } else if (myFinalSize < myCharMax-1) {
+        Serial.print("less than 10 bytes, so command: "); 
+        // I gues this could be commands
+    } else if (myFinalSize > myCharMax-1) {
+        Serial.print("Too big, Ignored: "); 
+
     }
     
-  if (myFinalSize > 0){
-    Serial.println(myBigInArray);
-  }
-  strncpy(myBigInArray, "", myFinalSize);  // erase the array of chars
-  myFinalSize = 0;
     
+    
+    Serial.println(myBigInArray);
   
+    strncpy(myBigInArray, "", myFinalSize);  // erase the array of chars
+    //myFinalSize = 0;
+     // LoRaRadio.receive(0);            // is zero infinite, other upto milliseconds
+  } 
+  //Serial.print("."); 
+  LoRaRadio.receive(0);  
 }
 
 
