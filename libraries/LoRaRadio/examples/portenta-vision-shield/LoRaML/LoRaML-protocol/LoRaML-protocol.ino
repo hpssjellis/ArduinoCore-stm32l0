@@ -21,10 +21,10 @@
 * V-0.3.x  Back to just serial display but from M7 core being able to send 10 bytes to Murata Module to broadcast as a Private, 
 *          InvertIQ false(Node send)
 *
-* V-0.4.x  Above but in Gateway mode being able to reply with "Yes-------"
+* V-0.4.x  Above but in Gateway mode being able to reply with "----ok----"
 *
 
-* V-0.5.x  Above but being able to receive and acknowledge the "Yes-------"
+* V-0.5.x  Above but being able to receive and acknowledge the "----ok----"
 *
 *
 * V-0.6.x  Above but being able to increase TX Strength if no reply. Note: if reply "Yes-------" then reduce TX strength???
