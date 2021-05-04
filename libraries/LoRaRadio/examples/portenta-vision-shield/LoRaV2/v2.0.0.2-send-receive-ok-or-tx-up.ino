@@ -124,8 +124,7 @@ void setup( void ){
     LoRaRadio.setLnaBoost(true); 
     
     LoRaRadio.setIQInverted(true);       // true gateway receive, false node receive etc
-    LoRaRadio.setPublicNetwork(false);   //false private network
- 
+
     LoRaRadio.onReceive(myReceive);      // just telling it about the callback 
     LoRaRadio.onTransmit(myNodeRead);   // should happen once transmitting is over
     LoRaRadio.receive(0);                // is zero infinite, other upto milliseconds
