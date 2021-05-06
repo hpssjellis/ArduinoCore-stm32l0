@@ -6,7 +6,7 @@
 TimerMillis myTimer01;   //, myTimer02, myTimer03;
 
 int myBestTx = 14;
-bool mySentIQFalse = true;
+bool mySentIQFalse = false;
 
 
 
@@ -17,20 +17,26 @@ char myOutArray[myCharMax];
 
 
 void myIQFalseTimeout(void){
-
+   // reset to IQ-true right away
+   LoRaRadio.onReceive(myReceiveIQTrue);      // just telling it about the callback 
+   LoRaRadio.receive(0); 
    if (mySentIQFalse){
      Serial.println("Timeout, things need to be reset or fixed ");  
      delay(20);       
      Serial.println();  
      delay(20);
-
+      
+     // reset the boolean, since this only happens once 
+     mySentIQFalse = true;
      
    } else { 
-     Serial.println("IQ false a response was received!");  
-     delay(20);       
+     Serial.print("IQ false a response was received (This is good): ");  
+     delay(20);   
+     Serial.println(myOutArray);
+     delay(20);    
    } 
-   LoRaRadio.onReceive(myReceiveIQTrue);      // just telling it about the callback 
-   LoRaRadio.receive(0); 
+   
+
 }
 
 
@@ -107,14 +113,9 @@ static void myReceiveIQTrue(void){  // constantly set to receive
       if (myI >= myCharMax) {break;}
    }
 
-   if (myI == 11){
+   if (myI == 11){    // if something came in send it out again
    
-   Serial.print("Incoming, IQ True: ");  
-   delay(20);       
-   Serial.println(myInArray);
-   delay(20);
-   Serial.println("parsePacket(): "+String( myIncoming ) + ", RSSI: " + String(myRssi)+", SNR: " + String(mySnr) );      
-   delay(20);
+
 
    //strcpy(myOutArray, myInArray);  // copy in to out
 
@@ -125,15 +126,25 @@ static void myReceiveIQTrue(void){  // constantly set to receive
    LoRaRadio.endPacket(); 
 
 
+   LoRaRadio.onReceive(myReceiveIQFalse);      // just telling it about the callback 
+   LoRaRadio.receive(5000);                   // only for 5000 ms}
+   
+   mySentIQFalse = false;
+   myTimer01.start(myIQFalseTimeout, 5000);
+      
+      
+   // Now that important stuff is done, print the information   
+   Serial.print("Incoming, IQ True: ");  
+   delay(20);       
+   Serial.println(myInArray);
+   delay(20);
+   Serial.println("parsePacket(): "+String( myIncoming ) + ", RSSI: " + String(myRssi)+", SNR: " + String(mySnr) );      
+   delay(20);     
+      
    Serial.print("packet sent on IQ true: ");  
    delay(20);  
    Serial.println(myInArray);
    delay(20); 
-   LoRaRadio.onReceive(myReceiveIQFalse);      // just telling it about the callback 
-   LoRaRadio.receive(5000);              // only for 5000 ms}
-   
-   mySentIQFalse = false;
-   myTimer01.start(myIQFalseTimeout, 5000);
    }
 }
 
@@ -154,7 +165,17 @@ static void myReceiveIQFalse(void){  // constantly set to receive
    }
 
    if (myI == 11){
+      
+   // If you got 10 characters then send it out again.   
+   LoRaRadio.beginPacket();  
+   LoRaRadio.write(myOutArray, sizeof(myOutArray));    
+   LoRaRadio.endPacket(); 
    
+   mySentIQFalse = true;       
+   LoRaRadio.onReceive(myReceiveIQTrue);      // just telling it about the callback 
+   LoRaRadio.receive(0);                // is zero infinite, other upto milliseconds
+      
+   // Now that info sent you can print what you got   
    Serial.print("Incoming, IQ false: ");  
    delay(20);       
    Serial.println(myOutArray);
@@ -166,17 +187,11 @@ static void myReceiveIQFalse(void){  // constantly set to receive
 
   // LoRaRadio.onTransmit(mySendIQFalseDone);   // should happen once transmitting is over
 
-   LoRaRadio.beginPacket();  
-   LoRaRadio.write(myOutArray, sizeof(myOutArray));    
-   LoRaRadio.endPacket(); 
 
-   mySentIQFalse = true;
    Serial.print("packet sent on IQ false: ");  
    delay(20);  
    Serial.println(myOutArray);
    delay(20); 
-   LoRaRadio.onReceive(myReceiveIQTrue);      // just telling it about the callback 
-   LoRaRadio.receive(0);                // is zero infinite, other upto milliseconds
   }
-
+// A wrong size IQ false response will leave you in IQ false mode until timer sets things back
 }
